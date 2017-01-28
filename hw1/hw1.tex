@@ -1,0 +1,119 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Alexander Powell
+% CSCI 654 - Advanced Computer Architecture
+% Homework #1
+% Due: 09.16.2016
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[10pt]{article} %
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage{graphics}
+\usepackage{psfrag}
+\usepackage{amsmath,amssymb}
+\usepackage{enumerate}
+\usepackage[makeroom]{cancel}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\setlength{\textwidth}{6.5in}
+\setlength{\textheight}{9in}
+
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\points}[1]{{\it (#1 Points)}}
+\newcommand{\tpoints}[1]{{\bf #1 Total points.}}
+
+\title{CSCI 654 -- Advanced Computer Architecture \\
+Homework 1 \\
+{\large{\bf Due: September 16, 2016}}}
+\date{}
+\author{Alexander Powell}
+
+
+\begin{document}
+\maketitle
+\begin{enumerate}
+
+\item %1
+
+\begin{enumerate}[(a)]
+\item
+
+From Amdahl's law we have that $\dfrac{1}{(1-p) + p/s}$.  By plugging in the values from the problem we see $\dfrac{1}{0.3 + 0.7/2} = \dfrac{1}{0.65}$.  Since $1 - 0.65 = 0.35$ you can decrease the frequency by $35\%$ and still get the same performance.  
+
+\item
+
+From the power equation, we know that 
+$$ \dfrac{\text{new power}}{\text{old power}} = 2 \times \dfrac{(\text{Voltage} \times 0.65)^2 \times \text{Frequency} \times 0.65}{\text{Voltage}^2 \times \text{Frequency}} $$
+
+By cancelling out the common terms in the fraction, we get $0.54925$.  
+
+\item
+
+To find the parallelization, we set up the following equation with the result of part b.  
+$$ 0.54925 = 2 \times \dfrac{(\text{Voltage} \times 0.3)^2 \times{Frequency} \times X}{\text{Voltage}^2 \times \text{Frequency}} $$
+$$ X = \dfrac{0.54925}{2 \times 0.3^2} $$
+Then we have that $3.05138 = \dfrac{1}{(1-p) + p/2}$.  Solving this gives us $p \approx 0.34456$ so about $34\%$ parallelization gives us a voltage at the voltage floor.  
+
+\item
+
+Again, from the equation in part b, we see that
+$$ \dfrac{\text{new power}}{\text{old power}} = 2 \times \dfrac{(\text{Voltage} \times 0.3)^2 \times \text{Frequency} \times 0.65}{\text{Voltage}^2 \times \text{Frequency}} $$
+
+After cancelling, this gives us $0.117$.  
+
+\end{enumerate}
+
+\item %2
+
+\begin{enumerate}
+
+\item
+
+Since the FIT for a single computer is given as $\dfrac{300 \text{ failures}}{\text{1 billion hours}}$, then the MTTF can be calculated as $\dfrac{10000000\cancel{00}}{3\cancel{00}} = 3,333,333.3333 \text{ hours}$.  $2/5$ of the $20000$ machines is $8000$, so the MTTF for the system can be calculated as $\dfrac{10000000}{3} \times 8000 = 26,666,666,666 \text{ hours}$.  
+
+\item
+
+Since the FIT is given as $\dfrac{300 \text{ failures}}{1 \text{ billion hours}}$, and 1 billion hours is equal to $41,666,666$ days, then we find that $7.2 \times 10^{-6}$ failures occur each day.  Let's denote the cost to repair a computer as $C$, then the amount of money lost, per day, to computers failing is $\$7.2 \times 10^{-6}$.  
+
+\end{enumerate}
+
+\item %3
+
+\begin{enumerate}
+
+\item $\dfrac{1}{0.2 + 0.8/N}$
+
+\item $\dfrac{1}{0.2 + 0.8/8 + 8 \times 0.005} \approx 2.94118$
+
+\item To go from 1 to 8 processors, the number of processors doubles three times (once from 1 to 2, once from 2 to 4, and finally from 4 to 8).  We can modify the previous answer to get: $$\dfrac{1}{0.2 + 0.8/8 + 3 \times 0.005} \approx 2.94118$$
+
+\item To generalize the above question to find the number of times $N$ doubles we can use $\log_2$.  Thus, like above, we have:
+$$ \dfrac{1}{0.2 + 0.8/N + \floor*{\log_2(N)} \times 0.005} $$
+Note: the floor function, $\floor*{x}$ is used here to denote that we're rounding down the result of the logarithm.  
+
+\end{enumerate}
+
+\end{enumerate}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
